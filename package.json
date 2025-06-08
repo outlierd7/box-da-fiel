@@ -9,7 +9,9 @@
     "lint": "next lint",
     "setup": "npm install && npm run dev",
     "clean": "rm -rf .next node_modules && npm install",
-    "reset": "npm run clean && npm run dev"
+    "reset": "npm run clean && npm run dev",
+    "git-update": "git add . && git commit -m \"Atualização automática\" && git push origin main",
+    "update": "powershell -ExecutionPolicy Bypass -File update-github.ps1"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
