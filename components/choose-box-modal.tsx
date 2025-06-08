@@ -22,6 +22,20 @@ interface ModalProductCardProps {
 
 // Cartão de produto simplificado para este modal
 function ModalProductCard({ product, onDetailsClick, onBoxSelectedForAnimation }: ModalProductCardProps) {
+  const handleCheckoutClick = () => {
+    // Abrir popup do checkout
+    const popup = window.open(
+      product.checkoutLink,
+      '_blank',
+      'width=800,height=600,scrollbars=yes,resizable=yes,status=yes,location=yes,toolbar=no,menubar=no'
+    );
+    
+    // Focar no popup se foi aberto com sucesso
+    if (popup) {
+      popup.focus();
+    }
+  };
+
   return (
     <div className="bg-brand-cardBg border border-brand-borderMuted/20 rounded-lg p-3 sm:p-4 flex flex-col items-center text-center shadow-lg hover:shadow-brand-primary/20 hover:border-brand-primary/50 transition-all duration-300 relative group h-full">
       {/* Botão Ver Itens da Caixa - no canto superior direito */}
@@ -53,19 +67,13 @@ function ModalProductCard({ product, onDetailsClick, onBoxSelectedForAnimation }
       </h4>
 
       <div className="mt-auto w-full">
-        <a 
-          href={product.checkoutLink} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="block w-full"
+        <Button
+          variant="default"
+          onClick={handleCheckoutClick}
+          className="btn-box badge-valor w-full bg-brand-primary text-brand-textDark hover:bg-opacity-80 font-bold py-2 px-3 sm:py-2.5 sm:px-4 rounded text-xs sm:text-sm uppercase tracking-wider transition-colors cursor-pointer"
         >
-          <Button
-            variant="default"
-            className="btn-box badge-valor w-full bg-brand-primary text-brand-textDark hover:bg-opacity-80 font-bold py-2 px-3 sm:py-2.5 sm:px-4 rounded text-xs sm:text-sm uppercase tracking-wider transition-colors"
-          >
-            R$ {product.price}
-          </Button>
-        </a>
+          R$ {product.price}
+        </Button>
       </div>
     </div>
   )

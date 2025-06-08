@@ -44,6 +44,22 @@ function ModalBoxItemCard({ item }: { item: BoxPossibleItem }) {
 }
 
 export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailModalProps) {
+  const handleCheckoutClick = () => {
+    if (!product) return;
+    
+    // Abrir popup do checkout
+    const popup = window.open(
+      product.checkoutLink,
+      '_blank',
+      'width=800,height=600,scrollbars=yes,resizable=yes,status=yes,location=yes,toolbar=no,menubar=no'
+    );
+    
+    // Focar no popup se foi aberto com sucesso
+    if (popup) {
+      popup.focus();
+    }
+  };
+
   if (!product) {
     return null
   }
@@ -91,11 +107,12 @@ export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailMo
                 Fechar
               </Button>
               
-              <a href={product.checkoutLink} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                <Button className="w-full sm:w-auto bg-brand-primary text-brand-textDark hover:bg-opacity-80 font-bold uppercase tracking-wider">
-                  Quero Minha Box!
-                </Button>
-              </a>
+              <Button 
+                onClick={handleCheckoutClick}
+                className="w-full sm:w-auto bg-brand-primary text-brand-textDark hover:bg-opacity-80 font-bold uppercase tracking-wider cursor-pointer"
+              >
+                Quero Minha Box!
+              </Button>
             </div>
           </div>
         </DialogFooter>
