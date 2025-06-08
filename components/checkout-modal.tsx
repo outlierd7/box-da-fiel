@@ -85,18 +85,6 @@ export function CheckoutModal({ isOpen, onClose, checkoutUrl, productName }: Che
             sandbox="allow-forms allow-scripts allow-same-origin allow-top-navigation allow-popups"
           />
         </div>
-
-        {/* Footer */}
-        <div className="p-3 border-t border-brand-borderMuted/20 bg-brand-background/50 backdrop-blur-sm">
-          <div className="flex items-center justify-between text-xs text-brand-textSecondary">
-            <span>Box da Fiel - Checkout Seguro</span>
-            <div className="flex items-center gap-4">
-              <span>🔒 SSL</span>
-              <span>💳 PIX/Cartão</span>
-              <span>✅ Garantia</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )
