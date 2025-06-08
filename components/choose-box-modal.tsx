@@ -131,6 +131,11 @@ export function ChooseBoxModal({ isOpen, onClose, products, onBoxSelectedForAnim
         product={selectedProductForDetail}
         isOpen={isDetailModalOpen}
         onClose={handleCloseDetailModal}
+        onCheckout={(product) => {
+          console.log('🔥 ChooseBoxModal: Checkout solicitado para', product.name)
+          handleCloseDetailModal()
+          // Aqui podemos abrir o checkout também se necessário
+        }}
       />
     </>
   )

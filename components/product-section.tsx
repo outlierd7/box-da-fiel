@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { ProductCard } from "./product-card"
 import { ProductDetailModal } from "./product-detail-modal"
+import { CheckoutModal } from "./checkout-modal"
 
 export interface BoxPossibleItem {
   id: string
@@ -651,6 +652,8 @@ interface ProductSectionProps {
 export function ProductSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null)
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false)
+  const [checkoutProduct, setCheckoutProduct] = useState<any | null>(null)
 
   const handleOpenModal = (product: any) => {
     setSelectedProduct(product)
@@ -660,6 +663,18 @@ export function ProductSection() {
   const handleCloseModal = () => {
     setIsModalOpen(false)
     setSelectedProduct(null)
+  }
+
+  const handleCheckout = (product: any) => {
+    console.log('🔥 ProductSection: Abrindo checkout para', product.name)
+    setCheckoutProduct(product)
+    setIsCheckoutOpen(true)
+  }
+
+  const handleCloseCheckout = () => {
+    console.log('🔒 ProductSection: Fechando checkout')
+    setIsCheckoutOpen(false)
+    setCheckoutProduct(null)
   }
 
   return (
@@ -678,6 +693,13 @@ export function ProductSection() {
         product={selectedProduct} 
         isOpen={isModalOpen} 
         onClose={handleCloseModal}
+        onCheckout={handleCheckout}
+      />
+      <CheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={handleCloseCheckout}
+        checkoutUrl={checkoutProduct?.checkoutLink || ''}
+        productName={checkoutProduct?.name || ''}
       />
     </section>
   )
