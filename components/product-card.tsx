@@ -1,7 +1,9 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { CheckoutModal } from "./checkout-modal"
 import type { ProductData } from "./product-section"
 
 interface ProductCardProps {
@@ -10,6 +12,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, onDetailsClick }: ProductCardProps) {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false)
   return (
     <div className="bg-brand-cardBg border border-brand-borderMuted/20 rounded-lg p-3 sm:p-4 flex flex-col items-center text-center shadow-lg hover:shadow-brand-primary/20 hover:border-brand-primary/50 transition-all duration-300 relative group h-full">
       {/* Botão Ver Itens da Caixa - no canto superior direito */}
@@ -41,20 +44,24 @@ export function ProductCard({ product, onDetailsClick }: ProductCardProps) {
       </h4>
 
       <div className="mt-auto w-full">
-        <a 
-          href={product.checkoutLink} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="block w-full"
+        <Button
+          variant="default"
+          className="btn-box badge-valor w-full bg-brand-primary text-brand-textDark hover:bg-opacity-80 font-bold py-2 px-3 sm:py-2.5 sm:px-4 rounded text-xs sm:text-sm uppercase tracking-wider transition-colors"
+          onClick={() => setIsCheckoutOpen(true)}
         >
-          <Button
-            variant="default"
-            className="btn-box badge-valor w-full bg-brand-primary text-brand-textDark hover:bg-opacity-80 font-bold py-2 px-3 sm:py-2.5 sm:px-4 rounded text-xs sm:text-sm uppercase tracking-wider transition-colors"
-          >
-            R$ {product.price}
-          </Button>
-        </a>
+          R$ {product.price}
+        </Button>
       </div>
+
+      <CheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        product={{
+          name: product.name,
+          price: product.price,
+          imageSrc: product.imageSrc || "/placeholder.svg?height=200&width=200&query=caixa+produto"
+        }}
+      />
     </div>
   )
 }
