@@ -13,6 +13,36 @@ interface CheckoutModalProps {
 export function CheckoutModal({ isOpen, onClose, checkoutUrl, productName }: CheckoutModalProps) {
   const [isLoading, setIsLoading] = useState(true)
 
+  // Desabilitar scroll da página quando modal estiver aberto
+  useEffect(() => {
+    if (isOpen) {
+      // Salvar posição atual do scroll
+      const scrollY = window.scrollY
+      
+      // Aplicar estilos para desabilitar scroll
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.left = '0'
+      document.body.style.right = '0'
+      document.body.style.overflow = 'hidden'
+      document.body.style.width = '100%'
+      
+      // Cleanup quando modal fechar
+      return () => {
+        document.body.style.position = ''
+        document.body.style.top = ''
+        document.body.style.left = ''
+        document.body.style.right = ''
+        document.body.style.overflow = ''
+        document.body.style.width = ''
+        
+        // Restaurar posição do scroll
+        window.scrollTo(0, scrollY)
+      }
+    }
+  }, [isOpen])
+
+  // Gerenciar loading do iframe
   useEffect(() => {
     if (isOpen) {
       setIsLoading(true)
@@ -22,10 +52,21 @@ export function CheckoutModal({ isOpen, onClose, checkoutUrl, productName }: Che
     }
   }, [isOpen])
 
+  // Prevenir fechamento acidental ao clicar no backdrop
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    // Só fechar se clicar exatamente no backdrop, não nos elementos filhos
+    if (e.target === e.currentTarget) {
+      onClose()
+    }
+  }
+
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center">
+    <div 
+      className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center"
+      onClick={handleBackdropClick}
+    >
       <div className="bg-brand-cardBg border border-brand-primary/30 rounded-none w-full h-full shadow-2xl flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-brand-borderMuted/20 bg-brand-background/95 backdrop-blur-sm">
