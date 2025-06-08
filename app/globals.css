@@ -1,0 +1,274 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+  }
+
+  html {
+    font-family: var(--font-montserrat), sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-brand-background text-brand-text;
+    font-weight: 400;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+  }
+
+  .swal-icon {
+    width: 80px;
+    height: 80px;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 50%;
+    padding: 0;
+    position: relative;
+    box-sizing: content-box;
+    margin: 20px auto;
+  }
+  .swal-icon--error {
+    border-color: #f27474;
+  }
+  .swal-icon--success {
+    border-color: #a5dc86;
+  }
+  .swal-icon--warning {
+    border-color: #f8bb86;
+  }
+  .swal-icon--info {
+    border-color: #c9dae1;
+  }
+  .swal-title {
+    color: rgba(0, 0, 0, 0.65);
+    font-weight: 600;
+    font-size: 27px;
+    text-align: center;
+    margin-bottom: 0;
+  }
+  .swal-text {
+    font-size: 16px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.64);
+  }
+  .swal-modal {
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  .swal-button {
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 24px;
+  }
+}
+
+@layer components {
+  .btn-degrade {
+    @apply bg-brand-primary text-brand-textDark;
+  }
+
+  .navbar-menu .nav-item a {
+    @apply uppercase text-xs font-medium tracking-wider px-3 py-2;
+  }
+  .navbar-menu .nav-item a:hover {
+    @apply text-brand-primary;
+  }
+
+  .live-feed-carousel .slide-item {
+    @apply p-2 text-center;
+  }
+  /* REMOVIDA A REGRA PROBLEMÁTICA .live-feed-carousel .slide-item img.imgProduto */
+
+  /* REMOVIDA A REGRA PROBLEMÁTICA DAQUI:
+  .live-feed-carousel .slide-item img.imgCaixa {
+    @apply max-w-[50px] h-auto mx-auto mt-1;
+  }
+  */
+  .live-feed-carousel .slide-item h6 {
+    @apply text-xs mt-1 text-brand-textMuted;
+  }
+}
+
+.text-gold {
+  color: #ffc107;
+}
+
+.bg-gold {
+  background-color: #ffc107;
+}
+
+.border-gold {
+  border-color: #ffc107;
+}
+
+.hover\:bg-gold-dark:hover {
+  background-color: #dda700;
+}
+
+.accordion-trigger[data-state="open"] > svg {
+  transform: rotate(180deg);
+  transition: transform 0.2s ease-out;
+}
+.accordion-trigger[data-state="closed"] > svg {
+  transform: rotate(0deg);
+  transition: transform 0.2s ease-out;
+}
+
+/* Prize Wheel Styles */
+.wheel.case-wheel {
+  position: relative;
+  width: 100%;
+  height: 180px; /* Altura da faixa da roleta */
+  overflow: hidden;
+  background-color: #080808; /* Fundo escuro para a roleta */
+  border-radius: 8px;
+  border: 2px solid #333;
+  padding: 5px 0;
+}
+
+.wheel-pointer.case-wheel-pointer {
+  position: absolute;
+  top: -5px; /* Ajuste para alinhar com a borda superior da roleta */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 20px solid #ffc107; /* Cor do ponteiro - dourado */
+  z-index: 10;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
+}
+
+.wheel-wrapper-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.wheel-content {
+  /* Renomeado de .wheel-wrapper para evitar conflito com Embla */
+  display: flex;
+  position: relative;
+  height: 100%;
+  /* A 'left' property será controlada por transform: translateX() via JS */
+}
+
+.wheel-item {
+  flex-shrink: 0;
+  width: 160px; /* Largura de cada item, ajuste conforme necessário */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 5px;
+  box-sizing: border-box;
+  background-color: #1a1a1a; /* Cor de fundo do item */
+  border-right: 1px solid #282828; /* Divisor entre itens */
+  color: #ccc;
+  text-align: center;
+  user-select: none;
+}
+.wheel-item:last-child {
+  border-right: none;
+}
+
+.conteudo-wheel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around; /* Distribui o conteúdo verticalmente */
+  height: 100%;
+  overflow: hidden; /* Para truncar texto longo */
+}
+
+.conteudo-wheel .title {
+  /* Renomeado de h5#title para ser mais específico e evitar conflitos de ID */
+  font-size: 0.75rem; /* 12px */
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px; /* Evita que o título quebre muito a largura */
+}
+
+.conteudo-wheel img {
+  max-height: 80px; /* Ajuste a altura máxima da imagem do item */
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 4px;
+}
+
+.conteudo-wheel .valorItem {
+  font-size: 0.7rem; /* 11px */
+  color: #a0a0a0;
+  font-weight: 500;
+}
+.conteudo-wheel .valorItem span {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+/* Animação de FadeIn para o item ganho */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
