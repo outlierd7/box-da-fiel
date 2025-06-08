@@ -5,13 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3017",
     "lint": "next lint",
     "setup": "npm install && npm run dev",
     "clean": "rm -rf .next node_modules && npm install",
     "reset": "npm run clean && npm run dev",
     "git-update": "git add . && git commit -m \"Atualização automática\" && git push origin main",
-    "update": "powershell -ExecutionPolicy Bypass -File update-github.ps1"
+    "update": "powershell -ExecutionPolicy Bypass -File update-github.ps1",
+    "deploy": "npm run build && pm2 restart box-ultimaedicao || pm2 start ecosystem.config.js",
+    "prod": "NODE_ENV=production npm start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
