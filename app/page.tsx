@@ -4,6 +4,7 @@ import { Header } from "@/components/header"
 import { MainBanners } from "@/components/main-banners"
 import { ProductSection } from "@/components/product-section"
 import { Footer } from "@/components/footer"
+import { NetworkUrlPopup } from "@/components/network-url-popup"
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
         </main>
       </div>
       <Footer />
+      <NetworkUrlPopup />
     </div>
   )
 }
