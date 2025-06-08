@@ -25,10 +25,10 @@ export function CheckoutModal({ isOpen, onClose, checkoutUrl, productName }: Che
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-brand-cardBg border border-brand-primary/30 rounded-2xl w-full max-w-4xl h-[80vh] max-h-[600px] shadow-2xl flex flex-col">
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center">
+      <div className="bg-brand-cardBg border border-brand-primary/30 rounded-none w-full h-full shadow-2xl flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-brand-borderMuted/20">
+        <div className="flex items-center justify-between p-4 border-b border-brand-borderMuted/20 bg-brand-background/95 backdrop-blur-sm">
           <div className="flex items-center gap-3">
             <CreditCard className="w-5 h-5 text-brand-primary" />
             <div>
@@ -66,10 +66,10 @@ export function CheckoutModal({ isOpen, onClose, checkoutUrl, productName }: Che
           </div>
         </div>
 
-        {/* Content */}
-        <div className="flex-1 relative">
+        {/* Content - Ocupando toda a tela disponível */}
+        <div className="flex-1 relative overflow-hidden">
           {isLoading && (
-            <div className="absolute inset-0 bg-brand-cardBg flex items-center justify-center">
+            <div className="absolute inset-0 bg-brand-cardBg flex items-center justify-center z-10">
               <div className="text-center">
                 <div className="w-8 h-8 border-2 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
                 <p className="text-brand-textSecondary">Carregando checkout...</p>
@@ -79,7 +79,7 @@ export function CheckoutModal({ isOpen, onClose, checkoutUrl, productName }: Che
           
           <iframe
             src={checkoutUrl}
-            className={`w-full h-full border-0 rounded-b-2xl ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+            className={`w-full h-full border-0 ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
             title="Checkout"
             onLoad={() => setIsLoading(false)}
             sandbox="allow-forms allow-scripts allow-same-origin allow-top-navigation allow-popups"
@@ -87,7 +87,7 @@ export function CheckoutModal({ isOpen, onClose, checkoutUrl, productName }: Che
         </div>
 
         {/* Footer */}
-        <div className="p-3 border-t border-brand-borderMuted/20 bg-brand-background/50">
+        <div className="p-3 border-t border-brand-borderMuted/20 bg-brand-background/50 backdrop-blur-sm">
           <div className="flex items-center justify-between text-xs text-brand-textSecondary">
             <span>Box da Fiel - Checkout Seguro</span>
             <div className="flex items-center gap-4">
