@@ -45,9 +45,18 @@ export default function RootLayout({
         
         {/* UTM Pixel Tracking */}
         <script
+          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+          data-utmify-prevent-xcod-sck=""
+          data-utmify-prevent-subids=""
+          async
+          defer
+        />
+
+
+        <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.pixelId = "6847a1f9ff6431885a34d43e";
+              window.pixelId = "68557c2c930cd7fc23b0e28c";
               var a = document.createElement("script");
               a.setAttribute("async", "");
               a.setAttribute("defer", "");
